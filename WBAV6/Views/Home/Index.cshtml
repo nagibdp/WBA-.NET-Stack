@@ -1,0 +1,62 @@
+﻿@model List<Profile>
+
+<div class="card shadow row mx-1 " style="background: hsla(250, 29%, 64%, .7)">
+    <div class="row mx-3 my-4">
+        <img class="col-2" src="/img/ESIME.png" alt="ESIMELogo" />
+        <div class="col-7">
+            <h4 class="font-weight-normal">
+                Sitio web para la busqueda de <br /> 
+                asesor en la carrerea de Ingenieria en computación
+            </h4>
+        </div>
+        <div class="col-3 d-flex flex-column">
+            <small>Burcar por nombre o palabra clave</small>
+            <input class="input-group-text text-left" type="text" placeholder="Buscar" />
+        </div>
+    </div>
+</div>
+
+@{
+    foreach (var profile in Model)
+    {
+        <div class="card shadow row mt-4 mx-1" style="
+                flex-direction:row;
+                margin-top: -100px;
+                background: hsla(249, 28%, 74%, 0.6);
+                backdrop-filter: blur(30px);">
+            <div class="container">
+                <a asp-action="Index" asp-controller="Profile" asp-route-id="@profile.User.Id"
+                   class="text-dark row m-4 d-flex align-items-center flex-nowrap"
+                   style="text-decoration:none;">
+                    <div class="col-3">
+                        <div class="d-flex"
+                             style="height: 13rem;
+                                width: 13rem;
+                                max-width: 13rem;
+                                overflow: hidden;
+                                border-radius: 50%;">
+                            <div class="d-flex justify-content-center align-items-center" style="width:100%; height:100%;">
+                                <img src="/img/@profile.User.Id@{<text>.png</text>}"
+                                     alt="profilePic"
+                                     class="img-fluid"
+                                     style="min-width: 120%; min-height: 120%; max-width: 200%; max-height: 200%; " />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-9 ml-5">
+                        <h2 class="font-weight-normal">
+                            @profile.User.Name @profile.User.LastNameF @profile.User.LastNameM
+                        </h2>
+                        <p class="text-black-50" style="font-size:20px;">@profile.Description</p>
+                        <p class="text-black-50" style="font-size:20px;">@profile.Estudy</p>
+                        <p class="text-black-50" style="font-size:20px;">@profile.Academy</p>
+                        <p class="text-black-50" style="font-size:20px;">#@profile.Keyword1 #@profile.Keyword2 @profile.Keyword3 @profile.Keyword4 @profile.Keyword5</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+}
+
+
+

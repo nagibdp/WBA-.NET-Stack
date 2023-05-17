@@ -1,0 +1,50 @@
+﻿@model ProyectViewModel
+
+@{
+    var userSession = Context.Session.GetUserSession();
+}
+
+<div>Crear Proyecto</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="@{if (Context.Request.Path == "/Proyect/Edit/"+@userSession.Id) {<text>Edit</text>} else {<text>New</text>} }"
+              asp-route-id="@userSession.Id">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="custom-control-label"></label>
+                <input asp-for="Title" class="form-control" type="tel" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Document" class="custom-control-label"></label>
+                <input asp-for="Document" class="form-control" type="file" />
+                <span asp-validation-for="Document" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="custom-control-label"></label>
+                <input asp-for="Description" class="form-control" type="text" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Keyword" class="custom-control-label"></label>
+                <input asp-for="Keyword" class="form-control" type="text" />
+                <span asp-validation-for="Keyword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">
+                    @{if (Context.Request.Path == "/Proyect/Edit/" + @userSession.Id)
+                        {<text>Editar</text>}
+                    else
+                    {<text>Crear</text>} }
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

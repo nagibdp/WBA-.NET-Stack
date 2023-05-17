@@ -1,0 +1,108 @@
+﻿@model ProfileViewModel
+
+@{ 
+    var userSession = Context.Session.GetUserSession();
+}
+
+<div>New Profile</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data"
+              asp-action="@{if (Context.Request.Path == "/Profile/Edit/"+@userSession.Id) {<text>Edit</text>} else {<text>New</text>} }"
+              asp-route-id="@userSession.Id">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Cel" class="custom-control-label"></label>
+                <input asp-for="Cel" class="form-control" type="tel" />
+                <span asp-validation-for="Cel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PictureFile" class="custom-control-label"></label>
+                <input asp-for="PictureFile" class="form-control" type="file" name="PictureFile" />
+                <span asp-validation-for="PictureFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="custom-control-label"></label>
+                <input asp-for="Description" class="form-control" type="text" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Estudy" class="custom-control-label"></label>
+                <input asp-for="Estudy" class="form-control" type="text" />
+                <span asp-validation-for="Estudy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Academy" class="custom-control-label"></label>
+                <select asp-for="Academy" class="form-control">
+                    <option value="default" selected disabled>
+                        Elige Academia
+                    </option>
+                    <option value="CE">Comunicaciones y electronica</option>
+                    <option value="I">Informatica</option>
+                    <option value="MP">Micro procesadores</option>
+                    <option value="IS">Ingenieria y sociedad</option>
+                    <option value="MF">Matematicas y fisica</option>
+                    <option value="C">Computacion</option>
+                    <option value="Q">Quimica</option>
+                </select>
+                <span asp-validation-for="Academy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Available" class="custom-control-label"></label>
+                @Html.CheckBoxFor(m => m.Available)
+                <span asp-validation-for="Available" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlaceAt" class="custom-control-label"></label>
+                <input asp-for="PlaceAt" class="form-control" type="text" />
+                <span asp-validation-for="PlaceAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DtVisible" class="custom-control-label"></label>
+                @Html.CheckBoxFor(m=>m.DtVisible)
+                <span asp-validation-for="DtVisible" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Keyword1" class="custom-control-label"></label>
+                <input asp-for="Keyword1" class="form-control" type="text" />
+                <span asp-validation-for="Keyword1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Keyword2" class="custom-control-label"></label>
+                <input asp-for="Keyword2" class="form-control" type="text" />
+                <span asp-validation-for="Keyword2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Keyword3" class="custom-control-label"></label>
+                <input asp-for="Keyword3" class="form-control" type="text" />
+                <span asp-validation-for="Keyword3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Keyword4" class="custom-control-label"></label>
+                <input asp-for="Keyword4" class="form-control" type="text" />
+                <span asp-validation-for="Keyword4" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Keyword5" class="custom-control-label"></label>
+                <input asp-for="Keyword5" class="form-control" type="text" />
+                <span asp-validation-for="Keyword5" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">
+                    @{if (Context.Request.Path == "/Profile/Edit/"+@userSession.Id)
+                        {<text>Editar</text>}
+                    else
+                    {<text>Registrarse</text>} }
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
